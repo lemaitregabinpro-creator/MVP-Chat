@@ -1,0 +1,18 @@
+# Configuration Netlify pour le déploiement
+# Documentation : https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Commande à exécuter pour construire le projet
+  command = "npm run build"
+  
+  # Dossier contenant les fichiers statiques à déployer
+  publish = "dist"
+
+# Redirections pour Single Page Application (SPA)
+# Toutes les routes sont redirigées vers index.html avec un status 200
+# Cela permet au routing côté client de fonctionner correctement
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+

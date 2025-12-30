@@ -1,0 +1,26 @@
+{
+  "name": "weliive-ai-co-pilot",
+  "version": "1.0.0",
+  "description": "Weliive AI Co-Pilot MVP - Chat interface with Hot Lead detection",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8"
+  },
+  "keywords": [
+    "ai",
+    "chat",
+    "real-estate",
+    "typescript",
+    "vite"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

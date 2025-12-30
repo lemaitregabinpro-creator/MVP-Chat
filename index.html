@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Weliive AI Co-Pilot</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <!-- Launcher View (Page d'accueil) -->
+    <div id="launcher-view" class="launcher-view">
+        <header class="app-header">
+            <div class="header-left">
+                <img src="/logo.png" alt="Weliive Logo" class="header-logo">
+                <span class="brand-name">Weliive</span>
+                <span class="version-badge">v1.0</span>
+            </div>
+
+            <nav class="header-center">
+                <a href="#" class="nav-link" data-mode="explore">Explorer</a>
+                <a href="#" class="nav-link live-link active" data-mode="live">
+                    <span class="live-dot"></span> En Direct
+                </a>
+                <a href="#" class="nav-link" data-mode="alerts">Mes Alertes</a>
+            </nav>
+
+            <div class="header-right">
+                <button class="icon-btn" aria-label="Recherche">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <button class="icon-btn" id="theme-toggle-btn" aria-label="Changer de thème">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </button>
+                <a href="#" class="login-link">Se connecter</a>
+                <button class="cta-btn-header">Créer une alerte</button>
+            </div>
+        </header>
+
+        <main class="launcher-main">
+            <h2 class="launcher-subtitle">Biens en Direct</h2>
+            <div class="properties-grid">
+                <!-- Bien 1 -->
+                <div class="property-card" data-property-id="1">
+                    <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80');"></div>
+                    <div class="property-overlay"></div>
+                    <div class="property-badge">EN DIRECT</div>
+                    <div class="property-content">
+                        <h3 class="property-title">Loft Moderne à Paris</h3>
+                        <div class="property-actions">
+                            <button class="property-button" data-property-id="1">Entrer dans le bien</button>
+                            <button class="property-button ai-summary-btn" data-id="paris">✨ Résumé IA</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bien 2 -->
+                <div class="property-card" data-property-id="2">
+                    <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80');"></div>
+                    <div class="property-overlay"></div>
+                    <div class="property-badge">EN DIRECT</div>
+                    <div class="property-content">
+                        <h3 class="property-title">Appartement Design Lyon</h3>
+                        <div class="property-actions">
+                            <button class="property-button" data-property-id="2">Entrer dans le bien</button>
+                            <button class="property-button ai-summary-btn" data-id="lyon">✨ Résumé IA</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bien 3 -->
+                <div class="property-card" data-property-id="3">
+                    <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80');"></div>
+                    <div class="property-overlay"></div>
+                    <div class="property-badge">EN DIRECT</div>
+                    <div class="property-content">
+                        <h3 class="property-title">Villa Contemporaine Nice</h3>
+                        <div class="property-actions">
+                            <button class="property-button" data-property-id="3">Entrer dans le bien</button>
+                            <button class="property-button ai-summary-btn" data-id="nice">✨ Résumé IA</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Live View (Chat Interface) -->
+    <div id="live-view" class="live-view hidden">
+        <button class="back-button" id="backButton" aria-label="Retour au menu">
+            <span>←</span>
+        </button>
+
+        <div class="video-background"></div>
+        
+        <div class="ai-alert" id="aiAlert">
+            <div class="ai-alert-content">
+                <span class="ai-alert-icon">🔥</span>
+                <span class="ai-alert-text">Hot Lead Detected</span>
+            </div>
+            <button class="ai-alert-button">Agir</button>
+        </div>
+
+        <div class="chat-container">
+            <div class="messages-area" id="messagesArea">
+                <div class="message ai">
+                    <div>Bonjour ! Je suis intéressé par votre appartement.</div>
+                    <div class="message-time">14:23</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barre de contrôles en bas -->
+        <div class="live-controls-bar">
+            <div class="actions-left">
+                <button class="action-button secondary" id="viewPropertyButton">
+                    Voir le bien
+                </button>
+                <button class="action-button secondary" id="qaButton">
+                    ❓ Q&A
+                </button>
+                <button class="action-button primary" id="interestedButton">
+                    Je suis intéressé
+                </button>
+                <button class="action-button heart-button" id="heartButton" aria-label="J'aime">
+                    ❤️
+                </button>
+            </div>
+
+            <div class="input-right">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        class="input-field" 
+                        id="messageInput" 
+                        placeholder="Tapez votre message..."
+                    >
+                    <button class="send-button">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details View (Page d'annonce) -->
+    <div id="details-view" class="details-view hidden">
+        <button class="back-button" id="backToLiveButton" aria-label="Retour au Live">
+            <span>←</span>
+        </button>
+
+        <div class="details-container">
+            <header class="details-header">
+                <h1 class="details-title">Penthouse Vue Tour Eiffel</h1>
+                <div class="details-price">1.250.000 €</div>
+            </header>
+
+            <div class="details-gallery">
+                <div class="gallery-main">
+                    <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80');"></div>
+                </div>
+                <div class="gallery-thumbnails">
+                    <div class="gallery-thumb" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80');"></div>
+                    <div class="gallery-thumb" style="background-image: url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&q=80');"></div>
+                    <div class="gallery-thumb" style="background-image: url('https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=400&q=80');"></div>
+                </div>
+            </div>
+
+            <section class="details-section">
+                <h2 class="section-title">Description</h2>
+                <p class="section-content">
+                    Magnifique penthouse situé au cœur de Paris avec une vue imprenable sur la Tour Eiffel. 
+                    Cet appartement exceptionnel bénéficie d'une luminosité exceptionnelle grâce à ses grandes 
+                    baies vitrées orientées sud. Le parquet en chêne massif, les hauteurs sous plafond généreuses 
+                    et les finitions haut de gamme font de ce bien un véritable écrin de modernité. 
+                    La cuisine équipée ouverte sur le salon offre un espace de vie convivial et chaleureux.
+                </p>
+            </section>
+
+            <section class="details-section">
+                <h2 class="section-title">Caractéristiques</h2>
+                <div class="characteristics-grid">
+                    <div class="characteristic-item">
+                        <span class="characteristic-label">Surface</span>
+                        <span class="characteristic-value">120 m²</span>
+                    </div>
+                    <div class="characteristic-item">
+                        <span class="characteristic-label">Chambres</span>
+                        <span class="characteristic-value">3</span>
+                    </div>
+                    <div class="characteristic-item">
+                        <span class="characteristic-label">Étage</span>
+                        <span class="characteristic-value">5</span>
+                    </div>
+                    <div class="characteristic-item">
+                        <span class="characteristic-label">Salles de bain</span>
+                        <span class="characteristic-value">2</span>
+                    </div>
+                    <div class="characteristic-item">
+                        <span class="characteristic-label">Année</span>
+                        <span class="characteristic-value">2020</span>
+                    </div>
+                    <div class="characteristic-item">
+                        <span class="characteristic-label">État</span>
+                        <span class="characteristic-value">Excellent</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Interest Modal (Modale d'offre) -->
+    <div id="interest-modal" class="interest-modal hidden">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-dialog">
+            <h2 class="modal-title">Faire une offre</h2>
+            <div class="modal-content">
+                <label for="offerInput" class="modal-label">Votre proposition de prix (€)</label>
+                <input 
+                    type="number" 
+                    id="offerInput" 
+                    class="modal-input" 
+                    placeholder="Ex: 1200000"
+                    min="0"
+                >
+            </div>
+            <div class="modal-actions">
+                <button class="modal-button cancel-button" id="cancelOfferButton">Annuler</button>
+                <button class="modal-button submit-button" id="submitOfferButton">Envoyer l'offre</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast (Notification) -->
+    <div id="success-toast" class="success-toast hidden">
+        <div class="toast-content">
+            <span class="toast-icon">✅</span>
+            <span class="toast-text">Votre intérêt a bien été transmis au vendeur</span>
+        </div>
+    </div>
+
+    <!-- Q&A Modal (Modale Questions/Réponses) -->
+    <div id="qa-modal" class="qa-modal hidden">
+        <div class="modal-overlay" id="qaModalOverlay"></div>
+        <div class="qa-modal-dialog">
+            <header class="qa-modal-header">
+                <h2 class="qa-modal-title">Questions / Réponses</h2>
+                <button class="qa-modal-close" id="qaModalClose" aria-label="Fermer">✕</button>
+            </header>
+
+            <div class="qa-list" id="qaList">
+                <!-- Les Q&A seront injectées dynamiquement -->
+            </div>
+
+            <footer class="qa-modal-footer">
+                <div class="qa-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="qaInput" 
+                        class="qa-input" 
+                        placeholder="Posez votre question..."
+                    >
+                    <button class="qa-send-button" id="qaSendButton">Envoyer</button>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- AI Summary Modal (Modale Résumé IA) -->
+    <div id="ai-summary-modal" class="ai-summary-modal hidden">
+        <div class="modal-overlay" id="aiSummaryModalOverlay"></div>
+        <div class="ai-summary-modal-dialog">
+            <header class="ai-summary-modal-header">
+                <h2 class="ai-summary-modal-title">Analyse de l'IA</h2>
+                <button class="ai-summary-modal-close" id="aiSummaryModalClose" aria-label="Fermer">✕</button>
+            </header>
+
+            <div class="ai-summary-modal-body">
+                <p id="ai-summary-text" class="ai-summary-text">
+                    <!-- Le texte sera injecté dynamiquement -->
+                </p>
+            </div>
+
+            <footer class="ai-summary-modal-footer">
+                <div class="ai-summary-chat">
+                    <div class="ai-summary-chat-messages" id="aiSummaryChatMessages">
+                        <!-- Les messages du chat seront injectés ici -->
+                    </div>
+                    <div class="ai-summary-chat-input-wrapper">
+                        <input 
+                            type="text" 
+                            id="aiSummaryChatInput" 
+                            class="ai-summary-chat-input" 
+                            placeholder="Posez une question à l'IA du bien..."
+                        >
+                        <button class="ai-summary-chat-send" id="aiSummaryChatSend">Envoyer</button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Login Modal (Modale de Connexion) -->
+    <div id="login-modal" class="login-modal hidden">
+        <div class="modal-overlay" id="loginModalOverlay"></div>
+        <div class="login-modal-dialog">
+            <header class="login-modal-header">
+                <h2 class="login-modal-title">Bienvenue sur Weliive</h2>
+                <button class="login-modal-close" id="loginModalClose" aria-label="Fermer">✕</button>
+            </header>
+
+            <div class="login-modal-body">
+                <button class="login-btn login-btn-google" data-provider="google">
+                    <span class="login-btn-icon">G</span>
+                    Continuer avec Google
+                </button>
+                <button class="login-btn login-btn-apple" data-provider="apple">
+                    <span class="login-btn-icon">🍎</span>
+                    Continuer avec Apple
+                </button>
+                <button class="login-btn login-btn-email" data-provider="email">
+                    <span class="login-btn-icon">✉</span>
+                    Continuer avec Email
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coming Soon Toast (Notification) -->
+    <div id="coming-soon-toast" class="coming-soon-toast hidden">
+        <div class="toast-content">
+            <span class="toast-icon">🚧</span>
+            <span class="toast-text" id="comingSoonText"></span>
+        </div>
+    </div>
+
+    <!-- Theme Modal (Modale de sélection de thème) -->
+    <div id="theme-modal" class="theme-modal hidden">
+        <div class="modal-overlay" id="themeModalOverlay"></div>
+        <div class="theme-modal-dialog">
+            <header class="theme-modal-header">
+                <h2 class="theme-modal-title">Choisir un thème</h2>
+                <button class="theme-modal-close" id="themeModalClose" aria-label="Fermer">✕</button>
+            </header>
+
+            <div class="theme-modal-body">
+                <div class="theme-selection-grid">
+                    <button class="theme-preview-btn" data-theme="bg-theme-1.webp">
+                        <img src="/bg-theme/bg-theme-1.webp" alt="Thème 1" />
+                    </button>
+                    <button class="theme-preview-btn" data-theme="bg-theme-2.webp">
+                        <img src="/bg-theme/bg-theme-2.webp" alt="Thème 2" />
+                    </button>
+                    <button class="theme-preview-btn" data-theme="bg-theme-3.webp">
+                        <img src="/bg-theme/bg-theme-3.webp" alt="Thème 3" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="src/main.ts"></script>
+</body>
+</html>

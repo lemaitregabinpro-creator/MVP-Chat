@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ============================================
+   CSS VARIABLES (Theme Configuration)
+   ============================================ */
+:root {
+    /* Colors - Background */
+    --bg-gradient-start: #0a0a0a;
+    --bg-gradient-mid: #1a1a2e;
+    --bg-gradient-end: #16213e;
+    --bg-video-gradient-start: #1e3c72;
+    --bg-video-gradient-end: #2a5298;
+    --bg-overlay-start: rgba(0, 0, 0, 0.3);
+    --bg-overlay-mid: rgba(0, 0, 0, 0.1);
+    --bg-overlay-end: rgba(0, 0, 0, 0.6);
+    
+    /* Colors - Glassmorphism */
+    --glass-bg-light: rgba(255, 255, 255, 0.1);
+    --glass-bg-dark: rgba(0, 0, 0, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-border-light: rgba(255, 255, 255, 0.1);
+    --glass-border-focus: rgba(255, 255, 255, 0.4);
+    
+    /* Colors - Accent */
+    --accent-color: #64b5f6;
+    --accent-color-light: rgba(100, 181, 246, 0.2);
+    --accent-color-border: rgba(100, 181, 246, 0.3);
+    --accent-color-hover: rgba(100, 181, 246, 0.4);
+    
+    /* Colors - Hot Lead Alert */
+    --hot-lead-gold: #ffd700;
+    --hot-lead-gold-light: rgba(255, 215, 0, 0.2);
+    --hot-lead-gold-border: rgba(255, 215, 0, 0.4);
+    --hot-lead-glow: rgba(255, 215, 0, 0.3);
+    --hot-lead-glow-strong: rgba(255, 215, 0, 0.5);
+    
+    /* Colors - Text */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-placeholder: rgba(255, 255, 255, 0.5);
+    
+    /* Colors - Messages */
+    --message-user-bg: rgba(100, 181, 246, 0.2);
+    --message-user-border: rgba(100, 181, 246, 0.3);
+    --message-ai-bg: rgba(255, 255, 255, 0.08);
+    --message-ai-border: rgba(255, 255, 255, 0.15);
+    
+    /* Spacing */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 20px;
+    --spacing-xl: 24px;
+    
+    /* Blur Effects */
+    --blur-sm: 8px;
+    --blur-md: 12px;
+    --blur-lg: 20px;
+    
+    /* Border Radius */
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --radius-full: 50%;
+    --radius-phone: 40px;
+    
+    /* Shadows */
+    --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+    --shadow-glow-accent: 0 0 20px rgba(100, 181, 246, 0.4);
+    --shadow-glow-hot-lead: 0 0 15px rgba(255, 215, 0, 0.4);
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-xs: 11px;
+    --font-size-sm: 13px;
+    --font-size-base: 14px;
+    --font-size-md: 15px;
+    --font-size-lg: 18px;
+    --font-size-xl: 24px;
+    
+    /* Transitions */
+    --transition-fast: 0.3s ease;
+    --transition-smooth: 0.4s ease-out;
+}
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: var(--spacing-lg);
+    overflow: hidden;
+}
+
+/* ============================================
+   PHONE CONTAINER
+   ============================================ */
+.phone-container {
+    width: 375px;
+    height: 812px;
+    background: #000;
+    border-radius: var(--radius-phone);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 
+        var(--shadow-lg),
+        0 0 0 8px rgba(255, 255, 255, 0.05),
+        inset 0 0 100px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   VIDEO BACKGROUND
+   ============================================ */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--bg-video-gradient-start) 0%, var(--bg-video-gradient-end) 100%);
+    background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+}
+
+.video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        var(--bg-overlay-start) 0%,
+        var(--bg-overlay-mid) 50%,
+        var(--bg-overlay-end) 100%
+    );
+}
+
+/* ============================================
+   CHAT CONTAINER
+   ============================================ */
+.chat-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+/* ============================================
+   AI ALERT (Hot Lead)
+   ============================================ */
+.ai-alert {
+    position: absolute;
+    top: var(--spacing-lg);
+    left: var(--spacing-lg);
+    right: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(var(--blur-md));
+    -webkit-backdrop-filter: blur(var(--blur-md));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    box-shadow: 
+        var(--shadow-md),
+        0 0 0 1px var(--glass-border-light) inset,
+        0 0 20px var(--hot-lead-glow);
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 20;
+    animation: slideDown var(--transition-smooth), glowPulse 2s ease-in-out infinite;
+}
+
+.ai-alert.show {
+    display: flex;
+}
+
+.ai-alert-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex: 1;
+}
+
+.ai-alert-icon {
+    font-size: var(--font-size-xl);
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+}
+
+.ai-alert-text {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: var(--font-size-md);
+    letter-spacing: 0.3px;
+}
+
+.ai-alert-button {
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--hot-lead-gold-light);
+    backdrop-filter: blur(var(--blur-sm));
+    border: 1px solid var(--hot-lead-gold-border);
+    border-radius: var(--radius-sm);
+    color: var(--hot-lead-gold);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ai-alert-button:hover {
+    background: rgba(255, 215, 0, 0.3);
+    border-color: rgba(255, 215, 0, 0.6);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-glow-hot-lead);
+}
+
+/* ============================================
+   MESSAGES AREA
+   ============================================ */
+.messages-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    scroll-behavior: smooth;
+}
+
+.messages-area::-webkit-scrollbar {
+    width: 4px;
+}
+
+.messages-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages-area::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 2px;
+}
+
+/* ============================================
+   MESSAGES
+   ============================================ */
+.message {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(var(--blur-md));
+    -webkit-backdrop-filter: blur(var(--blur-md));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    max-width: 85%;
+    word-wrap: break-word;
+    box-shadow: var(--shadow-sm);
+    animation: messageSlideIn var(--transition-fast) ease-out;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: var(--message-user-bg);
+    border-color: var(--message-user-border);
+}
+
+.message.ai {
+    align-self: flex-start;
+    background: var(--message-ai-bg);
+    border-color: var(--message-ai-border);
+}
+
+.message-time {
+    font-size: var(--font-size-xs);
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+/* ============================================
+   INPUT AREA
+   ============================================ */
+.input-area {
+    padding: var(--spacing-md);
+    background: var(--glass-bg-dark);
+    backdrop-filter: blur(var(--blur-lg));
+    -webkit-backdrop-filter: blur(var(--blur-lg));
+    border-top: 1px solid var(--glass-border-light);
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-field {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(var(--blur-md));
+    -webkit-backdrop-filter: blur(var(--blur-md));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family);
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.input-field::placeholder {
+    color: var(--text-placeholder);
+}
+
+.input-field:focus {
+    border-color: var(--glass-border-focus);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.send-button {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    background: var(--accent-color-light);
+    backdrop-filter: blur(var(--blur-md));
+    border: 1px solid var(--accent-color-border);
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.send-button:hover {
+    background: var(--accent-color-hover);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow-accent);
+}
+
+.send-button:active {
+    transform: scale(0.95);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 
+            var(--shadow-md),
+            0 0 0 1px var(--glass-border-light) inset,
+            0 0 20px var(--hot-lead-glow);
+    }
+    50% {
+        box-shadow: 
+            var(--shadow-md),
+            0 0 0 1px var(--glass-border-light) inset,
+            0 0 30px var(--hot-lead-glow-strong);
+    }
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
