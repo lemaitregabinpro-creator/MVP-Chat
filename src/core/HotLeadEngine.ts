@@ -7,7 +7,7 @@ import type { Message } from '../types';
 
 export class HotLeadEngine {
     private readonly hotLeadKeywords: string[];
-    private readonly minConfidence: number;
+    private minConfidence: number;
 
     constructor() {
         // Mots-clés pour détection basique (remplaçable par IA)
